@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >Seleccionar expediente </ion-title>
+    <ion-buttons slot="end">  
+      <ion-button color="dark" (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>   
+    </ion-buttons> 
+  </ion-toolbar>
+  <ion-searchbar #buscar (ionChange)="BuscarExpedientes(buscar.value)" animated placeholder="Buscar expediente"></ion-searchbar>
+</ion-header>
+<ion-content>
+  <ion-item  *ngFor="let item of expedientes; index as i" (click)="SeleccionarExpediente( item.expedienteId, i )">
+    <ion-label>{{ item.folio }} {{ item.nombre }} {{ item.apPaterno }} {{ item.apMaterno }}</ion-label>
+</ion-item>
+</ion-content>

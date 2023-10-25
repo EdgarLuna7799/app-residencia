@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >{{ folio }}</ion-title>
+    <ion-buttons slot="end">  
+      <ion-button color="dark" (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>   
+    </ion-buttons> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-radio-group [value]="confirmacion" (ionChange)="checkValue($event)">
+      <ion-list-header>
+        <ion-label>¿El paciente asistira a la cita?</ion-label>
+      </ion-list-header>
+  
+      <ion-item>
+        <ion-label>Si</ion-label>
+        <ion-radio slot="start" value="1"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio slot="start" value="3"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Quizás</ion-label>
+        <ion-radio slot="start" value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No pude contactar al paciente</ion-label>
+        <ion-radio slot="start" value="0"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>

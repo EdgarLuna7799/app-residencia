@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >Nuevo Evento</ion-title>
+    <ion-buttons slot="end">  
+      <ion-button color="dark" (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>   
+    </ion-buttons> 
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-input [value]="fecha" readonly></ion-input>
+    <ion-button fill="clear" id="calendario">
+      <ion-icon icon="calendar"></ion-icon>
+    </ion-button>
+    <ion-popover trigger="calendario" show-backdrop="true">
+      <ng-template>
+        <ion-datetime
+          #fechaCal
+          [min]="hoy"
+          [value]="fechaSeleccion"
+          presentation="date"
+          (ionChange)="fecha = formatDate(fechaCal.value); fechaCal.confirm(true);"
+        ></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+  <ion-item>
+    <ion-input [value]="hora" readonly></ion-input>
+    <ion-button fill="clear" id="calendarioHora">
+      <ion-icon icon="time"></ion-icon>
+    </ion-button>
+    <ion-popover trigger="calendarioHora" show-backdrop="true">
+      <ng-template>
+        <ion-datetime
+          #fechaCalHora
+          minuteValues="0,15,30,45"
+          [min]="hoy"
+          [value]="hora"
+          presentation="time"
+          (ionChange)="hora = formatDateHora(fechaCalHora.value); "
+        ></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Duración</ion-label>
+    <ion-select  #duracion (ionChange)="onChangeDuracion(duracion.value)" [value]="duracionSeleccion" okText="Seleccionar" cancelText="Cerrar">
+      <ion-select-option  *ngFor="let item of duraciones" value="{{ item.id }}">{{ item.label }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Tema</ion-label>
+    <ion-select  #tem (ionChange)="onChangeTema(tem.value)" [value]="temaSeleccion" okText="Seleccionar" cancelText="Cerrar">
+      <ion-select-option  *ngFor="let item of temas" value="{{ item.temaId }}">{{ item.tema }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Asunto</ion-label>
+    <ion-input type="text" name="asunto" [formControl]="asunto"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" >Descripción del evento</ion-label>
+    <ion-textarea  [formControl]="descripcion"> </ion-textarea>
+  </ion-item>
+
+
+  <ion-button expand="full"  (click)="SaveEvento()" size="small">Crear evento</ion-button>
+</ion-content>

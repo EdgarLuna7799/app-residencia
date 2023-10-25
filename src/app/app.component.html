@@ -1,0 +1,38 @@
+<ion-app>
+  <ion-split-pane contentId="main-content" style="--background:#ff0000">
+    <ion-menu contentId="main-content" type="overlay" *ngIf="session">
+      <ion-content>
+        <div class="text-center"> 
+          <img src="../../../assets/logo.png" class="logo">
+        </div>
+        <ion-list id="inbox-list">
+          <ion-list-header>Bienvenido</ion-list-header>
+          <ion-note>{{ nombre_mostrar }}</ion-note>
+          <br>
+          <ion-note>{{ email_mostrar }}</ion-note>
+          <ion-item  lines="full">            
+            <ion-select #sucursalId (ionChange)="onChange(sucursalId.value)" [value]="sucursalSeleccion"  okText="Seleccionar" cancelText="Cerrar">
+              <ion-select-option *ngFor="let sucursal of sucursales" [value]="sucursal.sucursalId"  > {{ sucursal.nombre }} </ion-select-option>              
+            </ion-select>
+          </ion-item>
+         
+
+           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-item  lines="none" detail="false" (click)="salir()" >
+            <ion-icon slot="start" name="log-out"></ion-icon>
+            <ion-label> Salir </ion-label>
+          </ion-item>
+          
+        </ion-list>
+
+        
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

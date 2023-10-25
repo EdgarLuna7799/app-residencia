@@ -1,0 +1,30 @@
+<ion-header>
+   
+  <ion-toolbar>
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons>
+    <ion-title>home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ios list-ios hydrated" inset>
+    <ion-list-header class="ios hydrated">
+      Country with area and population census
+    </ion-list-header>
+
+    <ion-item *ngFor="let expediente of datos">
+      <ion-thumbnail slot="start" class="ios hydrated">
+        <img src="https://smilesoft.com.mx/test/images/hombre.jpg">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ expediente.nombre }} {{ expediente.apPaterno }} {{ expediente.apMaterno }}</h2>
+        <h3>Folio: {{ expediente.folio }}</h3>
+        
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  
+
+</ion-content>

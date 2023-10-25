@@ -1,0 +1,32 @@
+.redondo{
+    border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+padding-top: -45px!important;
+height: 50px;
+}
+
+.blanco{
+    color:#fff!important;
+}
+
+@media (max-width: 600px) and (orientation: portrait) { 
+    .containerLogin{
+         background-image: url("../../../assets/fondo.png");
+    }
+    .login{
+        padding: 40% 40px 0 40px ;
+    }
+
+ }
+
+.containerLogin{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;  
+  
+  background-size: 100% 100% ;
+}

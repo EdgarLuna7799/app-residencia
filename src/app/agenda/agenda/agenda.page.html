@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons>  
+    <ion-title>Agenda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="12" size-sm="6">
+      <ion-datetime size="cover"  display-format="DD/MM/YYYY"  [(ngModel)]="fecha" (ionChange)="seleccionCalendar()" presentation="date"></ion-datetime>
+    </ion-col>
+    <ion-col size="12" size-sm="6">
+      <ion-list class="ion-padding">
+        <ion-list-header color="primary">
+          <ion-label>{{ fecha_seleccion }}</ion-label>
+        </ion-list-header>
+        
+        <ion-item [hidden]="emptyMessage">
+            No hay citas ni eventos registrados en esta fecha
+        </ion-item >
+        
+      </ion-list>
+
+      <ion-item *ngFor="let evento of eventos"  (click)="OpcionesCita(evento.title,evento.cita,evento.statusId,evento.id)">     
+       <ion-label class="ion-text-wrap">
+             {{evento.horaInicio}} - {{evento.horaFin}}  {{evento.folio}} 
+             <ion-text>
+               <br>
+              {{ evento.title| uppercase }}
+              <br>
+              <ion-label  *ngIf="evento.cita">{{ evento.status }}</ion-label> 
+             </ion-text>
+          </ion-label>
+        
+     </ion-item> 
+    
+     <!-- <ion-card *ngFor="let evento of eventos" (click)="OpcionesCita(evento.title,evento.cita,evento.statusId,evento.id)">
+        <ion-card-header >        
+           <ion-card-subtitle> {{evento.horaInicio}} - {{evento.horaFin}}  {{evento.folio}} </ion-card-subtitle>
+           <ion-card-title>{{ evento.title| uppercase }}</ion-card-title>
+        </ion-card-header>      
+        <ion-card-content>          
+            <ion-label slot="start" *ngIf="evento.cita">{{ evento.status }}</ion-label>         
+        </ion-card-content>
+      </ion-card>-->
+    </ion-col>
+    
+  </ion-row>
+ 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+   
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="reloadDatos(true)">      
+      <ion-icon name="reload-outline"></ion-icon>
+    </ion-fab-button>
+    <br>
+    <ion-fab-button color="success" (click)="OpcionesNuevo()">      
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+</ion-content>

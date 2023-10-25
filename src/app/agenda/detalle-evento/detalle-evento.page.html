@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >Evento</ion-title>
+    <ion-buttons slot="end">  
+      <ion-button color="dark" (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>   
+    </ion-buttons> 
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <ion-text >
+        <h2>Asunto</h2>
+      </ion-text>
+      <p>{{asunto}}</p>
+      
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <ion-text >
+        <h2>Fecha Programada</h2>
+      </ion-text>
+      <p>{{fechaProgramada}}</p>
+      
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <ion-text >
+        <h2>Duración</h2>
+      </ion-text>
+      <p>{{duracion}}</p>
+      
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <ion-text >
+        <h2>Capturado</h2>
+      </ion-text>
+      <p>{{capturado}} <br> {{ fechaCaptura }}</p>
+      
+    </ion-label>
+  </ion-item>
+</ion-content>

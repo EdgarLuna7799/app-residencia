@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >Nueva Cita </ion-title>
+    <ion-buttons slot="end">  
+      <ion-button color="dark" (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>   
+    </ion-buttons> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item  style="--background:#efefef" >
+    <ion-label> Expediente Nuevo </ion-label>
+    <ion-checkbox slot="end" )][(ngModel="nuevo"></ion-checkbox>
+  </ion-item>
+  
+  <ion-item>
+    <ion-input [value]="fecha" readonly></ion-input>
+    <ion-button fill="clear" id="calendario">
+      <ion-icon icon="calendar"></ion-icon>
+    </ion-button>
+    <ion-popover trigger="calendario" show-backdrop="true">
+      <ng-template>
+        <ion-datetime
+          #fechaCal
+          [min]="hoy"
+          [value]="fechaSeleccion"
+          presentation="date"
+          (ionChange)="fecha = formatDate(fechaCal.value); fechaCal.confirm(true);"
+        ></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+  <ion-item>
+    <ion-input [value]="hora" readonly></ion-input>
+    <ion-button fill="clear" id="calendarioHora">
+      <ion-icon icon="time"></ion-icon>
+    </ion-button>
+    <ion-popover trigger="calendarioHora" show-backdrop="true">
+      <ng-template>
+        <ion-datetime
+          #fechaCalHora
+          minuteValues="0,15,30,45"
+          [min]="hoy"
+          [value]="hora"
+          presentation="time"
+          (ionChange)="hora = formatDateHora(fechaCalHora.value); "
+        ></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Duración</ion-label>
+    <ion-select  #duracion (ionChange)="onChangeDuracion(duracion.value)" [value]="duracionSeleccion" okText="Seleccionar" cancelText="Cerrar">
+      <ion-select-option  *ngFor="let item of duraciones" value="{{ item.id }}">{{ item.label }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Tipo cita</ion-label>
+    <ion-select  #tip (ionChange)="onChangeTipoCita(tip.value)" [value]="tipoCitaSeleccion" okText="Seleccionar" cancelText="Cerrar">
+      <ion-select-option  *ngFor="let item of tiposCita" value="{{ item.tipoCitaId }}">{{ item.tipo }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" >Observaciones</ion-label>
+    <ion-textarea  [formControl]="observaciones"> </ion-textarea>
+  </ion-item>
+  
+
+
+<!-- autocomplete expedientes -->
+   <ion-item *ngIf="!nuevo">     
+      <ion-icon name="close" (click)="BorrarSeleccion()" slot="start" *ngIf="botonLimpiar" color="danger"></ion-icon>     
+      <ion-label class="ion-text-wrap">
+        {{ expedienteLabel }}
+        </ion-label>
+      <ion-icon name="search" slot="end" (click)="BuscarExpedientes()" color="primary"></ion-icon>
+   </ion-item> 
+
+  <!-- fin autocomplete expedientes -->
+
+  <ion-item-group  class="nuevoExpediente" *ngIf="nuevo">
+    <ion-item color="warning" text-wrap>
+      <ion-label class="ion-text-wrap">      
+        <p><ion-icon name="alert-circle-outline"></ion-icon> Se creara un expediente nuevo e incompleto</p>      
+      </ion-label> 
+    </ion-item>
+    <ion-item class="nuevoExpediente">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" name="nombre" [formControl]="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido paterno</ion-label>
+      <ion-input type="text" name="apPaterno" [formControl]="apPaterno"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido Materno</ion-label>
+      <ion-input type="text" name="apMaterno" [formControl]="apMaterno"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Tipo Teléfono</ion-label>
+      <ion-select  #tipoTel (ionChange)="onChangeTipoTelefono(tipoTel.value)" [value]="tipoTelefonoSeleccion" okText="Seleccionar" cancelText="Cerrar">
+        <ion-select-option  *ngFor="let item of tipoTelefonos" value="{{ item.id }}">{{ item.label }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="nuevoExpediente">
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input type="text"   name="telefono" maxlength="10" [formControl]="telefono"></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-label>
+          <ion-icon name="logo-whatsapp"></ion-icon> 
+          Whatapps
+      </ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="whatapps"></ion-checkbox>
+    </ion-item>
+    <ion-item >
+      <ion-label>
+          <ion-icon name="call"></ion-icon> 
+          Llamadas
+      </ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="llamadas"></ion-checkbox>
+    </ion-item>
+    <ion-item >
+      <ion-label>
+          <ion-icon name="mail"></ion-icon> 
+          SMS
+      </ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="sms"></ion-checkbox>
+    </ion-item>
+</ion-item-group>
+
+    <ion-button expand="full"  (click)="SaveCita()" size="small">Crear cita</ion-button>
+
+</ion-content>

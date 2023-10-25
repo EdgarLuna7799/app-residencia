@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons>  
+    <ion-title>Ingresos</ion-title>
+
+    
+  </ion-toolbar>
+  <ion-item>
+    <ion-input [value]="fecha" readonly></ion-input>
+    <ion-button fill="clear" id="calendario">
+      <ion-icon icon="calendar"></ion-icon>
+    </ion-button>
+    <ion-popover trigger="calendario" show-backdrop="true">
+      <ng-template>
+        <ion-datetime
+          #fechaCal
+          [max]="hoy"
+          [value]="fechaSeleccion"
+          presentation="date"
+          (ionChange)="fecha = formatDate(fechaCal.value); fechaCal.confirm(true);"
+        ></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let pago of ingresos"  (click)="OpcionesPago(pago.pagoFolio,pago.pagoId)">   
+    <ion-avatar slot="start" *ngIf="!foto">
+      <img [src]="pago.atendio.foto50">
+    </ion-avatar>  
+    <ion-label class="ion-text-wrap textChico">
+           <span style="color:#4554E5">{{pago.pagoFolio}}</span>   <span style="float:right ;"> {{ pago.fecha|date:"dd/MM/yy, h:mm a" }}</span>
+          <ion-text>
+            <br>
+           {{ pago.expedienteFolio| uppercase }} {{ pago.expedienteTitle| uppercase }}
+           <br>
+           <ion-label >{{ pago.conceptoRemision }}</ion-label> 
+           <br>
+           <span color="primary" class="montoText">${{ pago.montoPago }} {{ pago.metodo }}</span> 
+           <br>
+           {{ pago.nombre| uppercase }} {{ pago.apellidoPaterno| uppercase }} {{ pago.apellidoMaterno| uppercase }}
+           
+          </ion-text>
+       </ion-label>
+     
+  </ion-item> 
+</ion-content>

@@ -1,0 +1,32 @@
+<div class="containerLogin">
+
+<div class="login">
+  <div class="text-center"> 
+    <img src="../../../assets/logo.png" class="logo">
+  </div>
+  <br>
+  <form #login>
+    <ion-item lines="full" class="redondo">
+    
+      <ion-input type="email" name="email"  placeholder="Correo electrónico"  [formControl]="email" required></ion-input>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item lines="full" class="redondo">
+      
+      <ion-input type="password" name="passwd" placeholder="Contraseña"  [formControl]="passwd" required ngModel></ion-input>
+    </ion-item>
+    <br>
+    <br>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" (click)="InicioSession(login)" expand="block">Iniciar sesíon</ion-button>
+        <a [routerLink]="['/forgot-password']" class="small-text blanco">¿Olvidaste tu contraseña?</a>
+      </ion-col>
+    </ion-row>
+  </form>
+</div>
+<div style="position:absolute; bottom: 20px; left: 10px; ">
+      Tecnológias JEBM     
+</div>
+</div>
